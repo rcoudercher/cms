@@ -25,7 +25,7 @@
     {{ $var }}
   </div>
 
-  <p>test</p>
+  <p>testing</p>
   
   
   <script type="text/javascript">
