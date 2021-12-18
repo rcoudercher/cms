@@ -57,21 +57,21 @@
               <div class="col-sm-6 col-md-4 mt-5 mt-sm-0">
                 <h6 class="h6">Nous soutenir</h5>
                 <ul class="m-0 p-0">
-                  <li class="menu-item"><a href="">Faire un don</a></li>
-                  <li class="menu-item"><a href="">Contribuer</a></li>
+                  <li class="menu-item"><a href="{{ route('donation') }}">Faire un don</a></li>
+                  <li class="menu-item"><a href="{{ route('contribute') }}">Contribuer</a></li>
                 </ul>
               </div>
               <div class=" col-md-4 mt-5 mt-md-0">
                 <h6 class="h6">Réseaux</h5>
                 <ul class="m-0 p-0">
-                  <li class="menu-item"><a href="">Twitter</a></li>
-                  <li class="menu-item"><a href="">GAB</a></li>
-                  <li class="menu-item"><a href="">GETTR</a></li>
+                  <li class="menu-item"><a href="https://twitter.com/ldchemin">Twitter</a></li>
+                  <li class="menu-item"><a href="https://gab.com/ldchemin/">Gab</a></li>
+                  <li class="menu-item"><a href="https://gettr.com/user/ldchemin">GETTR</a></li>
                 </ul>
               </div>
             </div>
             <div class="mt-5">
-              <p class="text-center text-md-start fs-6 fst-italic">© 2021 le Droit Chemin - Tous droits réservés</p>
+              <p class="text-center text-md-start fs-6 fst-italic">© 2021-2022 Le Droit Chemin - Tous droits réservés</p>
             </div>
           </footer>
         </div>

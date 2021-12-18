@@ -6,6 +6,8 @@ use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvid
 use Illuminate\Support\Facades\Gate;
 use App\Models\User;
 use App\Models\Comment;
+use Illuminate\Auth\Notifications\VerifyEmail;
+use Illuminate\Notifications\Messages\MailMessage;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -30,6 +32,5 @@ class AuthServiceProvider extends ServiceProvider
     Gate::define('access-admin', function (User $user) {
       return $user->hasRole('admin');
     });
-    
   }
 }

@@ -7,7 +7,7 @@
     @csrf
     <h2 class="h3 text-center mb-4">Inscription</h2>
     <div class="mb-3">
-      <label for="name" class="form-label">Nom</label>
+      <label for="name" class="form-label">Pseudo</label>
       <input name="name" type="text" @class([
         'form-control',
         'is-invalid' => $errors->has('name'),

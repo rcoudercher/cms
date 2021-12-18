@@ -8,9 +8,10 @@ use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use App\Actions\Fortify\CreateNewUser;
-use Illuminate\Auth\Events\Registered;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Auth\Events\PasswordReset;
+
+use App\Events\UserRegisteredEvent;
 
 class AuthController extends Controller
 {
@@ -21,10 +22,10 @@ class AuthController extends Controller
     $user = $newUser->create($request->only(['name', 'email', 'password', 'password_confirmation']));
     
     // attaches the 'user' role to this new user
-    $user->roles()->attach(1);
+    $user->roles()->attach(2);
     
     // dispatch the event to send verification link by email
-    event(new Registered($user));
+    event(new UserRegisteredEvent($user));
     
     // log this new user in
     if (Auth::attempt($request->only(['email', 'password']))) {

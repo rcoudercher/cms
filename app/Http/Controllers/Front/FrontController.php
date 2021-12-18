@@ -17,6 +17,11 @@ use Illuminate\Support\Str;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 
+
+
+use Illuminate\Support\Facades\Config as Config2;
+use Illuminate\Support\Facades\URL;
+
 class FrontController extends Controller
 {  
   public function homepage(Request $request)
@@ -156,5 +161,36 @@ class FrontController extends Controller
     ]);
   }
   
+  public function donation()
+  {
+    return view('front.page')->with([
+      'page' => Page::where('id', 6)->first(),
+    ]);
+  }
+  
+  public function contribute()
+  {
+    return view('front.page')->with([
+      'page' => Page::where('id', 7)->first(),
+    ]);
+  }
+  
+  public function test()
+  {
+    
+    $url = URL::temporarySignedRoute(
+        'verification.verify',
+        Carbon::now()->addMinutes(Config2::get('auth.verification.expire', 60)),
+        [
+            'id' => Auth::user()->getKey(),
+            'hash' => sha1(Auth::user()->getEmailForVerification()),
+        ]
+    );
+    
+    
+    return view('front.test')->with([
+      'url' => $url,
+    ]);
+  }
   
 }

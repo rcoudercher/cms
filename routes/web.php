@@ -23,7 +23,7 @@ use App\Http\Controllers\Front\ProfileController;
 use App\Http\Controllers\AuthController;
 
 
-Route::view('/test', 'front.test')->name('test');
+Route::get('/test', [FrontController::class, 'test'])->name('test');
 
 Route::get('/', [FrontController::class, 'homepage'])->name('home');
 
@@ -158,6 +158,10 @@ Route::get('/contact', [FrontController::class, 'contact'])->name('contact');
 Route::get('/mentions-legales', [FrontController::class, 'legal'])->name('legal');
 Route::get('/confidentialite', [FrontController::class, 'privacy'])->name('privacy');
 Route::get('/charte-commentaires', [FrontController::class, 'commentRules'])->name('comment-rules');
+
+Route::get('/faire-un-don', [FrontController::class, 'commentRules'])->name('donation');
+Route::get('/contribuer', [FrontController::class, 'commentRules'])->name('contribute');
+
 
 Route::get('/dernieres-nouvelles', [FrontController::class, 'latestNews'])->name('latestNews');
 
