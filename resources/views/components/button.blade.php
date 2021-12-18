@@ -1,0 +1,1 @@
+<a class="button-dark d-block text-center" href="{{ $link }}">{{ $text }}</a>

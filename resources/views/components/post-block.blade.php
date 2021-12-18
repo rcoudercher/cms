@@ -1,0 +1,25 @@
+<article class="post-block my-4 pt-4 border-top">
+  <div class="row">
+    <div class="col-8 col-md-4">
+      <h2 class="h5">
+        <a href="{{ route('article.show', ['year' => $article->created_at->year, 'month' => $article->created_at->month, 'day' => $article->created_at->day, 'slug' => $article->slug]) }}">{{ $article->title }}</a>
+      </h2>
+      <div class="meta d-flex">
+        @if (!is_null($article->category))
+          <div class="text-uppercase">{{ $article->category->name }}</div>
+          <div class="mx-1">|</div>
+        @endif
+        <div>{{ $article->postedAtDifference() }}</div>
+      </div>
+    </div>
+    <div class="col-md-4 d-none d-md-block">{{ $article->description }}</div>
+    <div class="col-4">
+      <a href="{{ route('article.show', ['year' => $article->created_at->year, 'month' => $article->created_at->month, 'day' => $article->created_at->day, 'slug' => $article->slug]) }}">
+        <figure class="mb-0">
+          <img class="img-fluid rounded" src="{{ $article->image->url }}">
+          <figcaption class="credit">{{ $article->image->credit }}</figcaption>
+        </figure>
+      </a>
+    </div>
+  </div>
+</article>

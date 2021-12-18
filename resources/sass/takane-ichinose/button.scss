@@ -1,0 +1,42 @@
+// "Button" made by Takane Ichinose
+// - https://codepen.io/takaneichinose
+// - https://github.com/takaneichinose
+// - https://twitter.com/takane_ichi
+
+// $color: #1476ff;
+$color: #8c030e;
+// $color: #232226;
+// $color: #bfb6ae;
+// $color: #716668;
+
+
+.button {
+  display: block;
+  text-align: center;
+  font-size: 18px;
+  font-weight: bold;
+  font-family: inherit;
+  color: white;
+  background-color: $color;
+  // width: 250px;
+  border: solid 2px darken($color, 10%);
+  padding: 10px 20px;
+  cursor: pointer;
+  outline: none;
+  box-shadow: 0 5px darken($color, 10%);
+  transition:
+    background-color 100ms ease-out,
+    box-shadow 100ms ease-out,
+    transform 100ms ease-out;
+  &:hover,
+  &:focus,
+  &:active {
+    color: white;
+    background-color: lighten($color, 5%);
+  }
+  &:active {
+    background-color: darken($color, 5%);
+    box-shadow: 0 0 darken($color, 10%);
+    transform: translateY(5px);
+  }
+}
