@@ -1,6 +1,6 @@
 
 <div id="navSupport" class="mb-3">
-  <a id="navLinkSubscribe" href="#">Nous soutenir</a>
+  <a id="navLinkSubscribe" href="{{ route('donation') }}">Nous soutenir</a>
 </div>
 
 <div id="navAuth" class="mb-3">

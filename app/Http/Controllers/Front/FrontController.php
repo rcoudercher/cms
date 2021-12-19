@@ -174,23 +174,4 @@ class FrontController extends Controller
       'page' => Page::where('id', 7)->first(),
     ]);
   }
-  
-  public function test()
-  {
-    
-    $url = URL::temporarySignedRoute(
-        'verification.verify',
-        Carbon::now()->addMinutes(Config2::get('auth.verification.expire', 60)),
-        [
-            'id' => Auth::user()->getKey(),
-            'hash' => sha1(Auth::user()->getEmailForVerification()),
-        ]
-    );
-    
-    
-    return view('front.test')->with([
-      'url' => $url,
-    ]);
-  }
-  
 }
