@@ -6,12 +6,21 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
 use App\Actions\Fortify\CreateNewUser;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Auth\Events\PasswordReset;
-
+use App\Events\PasswordResetEvent;
 use App\Events\UserRegisteredEvent;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Mail\VerifyEmailMail;
+use App\Mail\PasswordResetLinkMail;
+use App\Models\User;
+use Carbon\Carbon;
+
+
 
 class AuthController extends Controller
 {
@@ -74,42 +83,124 @@ class AuthController extends Controller
   
   public function resendEmailVerificationLink(Request $request)
   {
-    $request->user()->sendEmailVerificationNotification();
+    $user = Auth::user();
+        
+    if ($user instanceof MustVerifyEmail && ! $user->hasVerifiedEmail()) {
+      Mail::to($user->email)
+            ->queue(new VerifyEmailMail($user));
+    }
+    
     return back()->with('notification', 'Un nouveau lien de vérification vient d\'être envoyé à votre adresse email');
   }
   
   public function forgotPassword(Request $request)
   {
-    $request->validate(['email' => 'required|email']);
-    $status = Password::sendResetLink($request->only('email'));
-    return $status === Password::RESET_LINK_SENT
-        ? redirect()->route('home')->with(['notification' => __($status)])
-        : back()->withErrors(['email' => __($status)]);
+    // makes sure the given email exists in the users table
+    $request->validate(['email' => 'required|email|exists:users']);
+    
+    // retrieve the user requesting a password reset
+    $user = User::where('email', $request->email)->firstOrFail();
+    
+    // creates a token
+    $token = Str::random(60);
+        
+    // insert token and email in database
+    DB::table('password_resets')->insert([
+      'email' => $request->email,
+      'token' => $token,
+      'created_at' => Carbon::now()
+    ]);
+    
+    //Generate, the password reset link. The token generated is embedded in the link
+    $link = env('APP_URL') . 'reset-password/' . $token . '?email=' . urlencode($user->email);
+    
+    
+    if ($this->sendPasswordResetEmail($user, $token)) {
+      return redirect()->back()->with('notification', 'Nous vous avons envoyé un email pour changer votre mot de passe');
+    } else {
+      return redirect()->back()->with('notification', 'Une erreur s\'est produite');
+    }
+    
+    // $status = Password::sendResetLink($request->only('email'));
+    // 
+    // return $status === Password::RESET_LINK_SENT
+    //     ? redirect()->route('home')->with(['notification' => __($status)])
+    //     : back()->withErrors(['email' => __($status)]);
   }
+  
+  private function sendPasswordResetEmail($user, $token)
+  {
+    // generate the password reset link with the token embedded into it
+    $link = env('APP_URL') . 'reset-password/' . $token . '?email=' . urlencode($user->email);
+
+    try {
+      Mail::to($user->email)->queue(new PasswordResetLinkMail($user, $link));
+      return true;
+    } catch (\Exception $e) {
+      return false;
+    }
+  }
+    
+  // public function resetPassword(Request $request)
+  // {
+  //   $request->validate([
+  //       'token' => 'required',
+  //       'email' => 'required|email',
+  //       'password' => 'required|min:8|confirmed',
+  //   ]);
+  // 
+  //   $status = Password::reset(
+  //       $request->only('email', 'password', 'password_confirmation', 'token'),
+  //       function ($user, $password) {
+  //           $user->forceFill([
+  //               'password' => Hash::make($password)
+  //           ])->setRememberToken(Str::random(60));
+  // 
+  //           $user->save();
+  // 
+  //           event(new PasswordReset($user));
+  //       }
+  //   );
+  // 
+  //   return $status === Password::PASSWORD_RESET
+  //               ? redirect()->route('login')->with('notification', __($status))
+  //               : back()->withErrors(['email' => [__($status)]]);
+  // }
   
   public function resetPassword(Request $request)
   {
+    // validate form inputs
     $request->validate([
-        'token' => 'required',
-        'email' => 'required|email',
-        'password' => 'required|min:8|confirmed',
+      'email' => 'required|email|exists:users',
+      'password' => 'required|min:8|confirmed',
+      'token' => 'required',
     ]);
-
-    $status = Password::reset(
-        $request->only('email', 'password', 'password_confirmation', 'token'),
-        function ($user, $password) {
-            $user->forceFill([
-                'password' => Hash::make($password)
-            ])->setRememberToken(Str::random(60));
-
-            $user->save();
-
-            event(new PasswordReset($user));
-        }
-    );
-
-    return $status === Password::PASSWORD_RESET
-                ? redirect()->route('login')->with('notification', __($status))
-                : back()->withErrors(['email' => [__($status)]]);
+    
+    // look for given email/token in database
+    $tokenData = DB::table('password_resets')
+                      ->where('email', $request->email)
+                      ->where('token', $request->token)
+                      ->first();
+    
+    // if nothing found, redirect with error message
+    if (!$tokenData) {
+      back()->with(['notification' => 'Email et/ou Token incorrects']);
+    }
+    
+    // save the new password
+    $user = User::where('email', $request->email)->firstOrFail();
+    $user->password = Hash::make($request->password);
+    $user->save();
+    
+    
+    // dispatch the event
+    event(new PasswordResetEvent($user));
+        
+    // delete the token
+    DB::table('password_resets')->where('email', $user->email)->delete();
+    
+    return redirect()->route('home')->with('notification', 'Votre mot de passe a été mis à jour correctement');
+    
   }
+  
 }

@@ -31,7 +31,8 @@ class SendEmailVerificationNotificationListener
     public function handle(UserRegisteredEvent $event)
     {
       if ($event->user instanceof MustVerifyEmail && ! $event->user->hasVerifiedEmail()) {        
-          Mail::to($event->user->email)->send(new VerifyEmailMail($event->user));
+          Mail::to($event->user->email)
+                ->queue(new VerifyEmailMail($event->user));
       }
     }
 }

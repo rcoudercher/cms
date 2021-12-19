@@ -18,6 +18,7 @@ use App\Events\RoleDestroyedEvent;
 use App\Events\TagDestroyedEvent;
 use App\Events\UserDestroyedEvent;
 use App\Events\UserRegisteredEvent;
+use App\Events\PasswordResetEvent;
 
 
 use App\Listeners\SendCommentApprovedEmailListener;
@@ -28,6 +29,7 @@ use App\Listeners\NullArticleIdForCommentsListener;
 use App\Listeners\NullUserIdForCommentsListener;
 use App\Listeners\NullCategoryIdForArticlesListener;
 use App\Listeners\SendEmailVerificationNotificationListener;
+use App\Listeners\SendPasswordResetConfirmationEmailListener;
 
 
 
@@ -79,6 +81,9 @@ class EventServiceProvider extends ServiceProvider
           SendAccountDeletionConfirmationEmailListener::class,
           SendUserDestroyedEmailListener::class,
           NullUserIdForCommentsListener::class,
+        ],
+        PasswordResetEvent::class => [
+          SendPasswordResetConfirmationEmailListener::class,
         ],
     ];
 
