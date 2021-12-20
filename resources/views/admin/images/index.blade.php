@@ -12,7 +12,7 @@
     <thead>
       <tr>
         <th scope="col">id</th>
-        <th scope="col">path</th>
+        <th scope="col">thumbnail</th>
         <th scope="col">credit</th>
         <th scope="col">actions</th>
       </tr>
@@ -21,7 +21,7 @@
     @foreach ($images as $image)
       <tr>
         <td>{{ $image->id }}</td>
-        <td>{{ $image->path }}</td>
+        <td><img style="max-width: 250px;" src="{{ $image->url }}"></td>
         <td>{{ $image->credit }}</td>
         <td>
           <a class="btn btn-primary" href="{{ route('admin.images.show', ['image' => $image]) }}">show</a>

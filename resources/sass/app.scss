@@ -189,6 +189,23 @@ blockquote p {
   color: $gray;
 }
 
+#article-infos a {
+  color: $title-color;
+  text-decoration: underline;
+  text-decoration-color: $gray;
+  &:hover {
+    text-decoration: none;
+  }
+}
+
+#article-content a {
+  color: $main-color;
+  text-decoration: underline;
+  &:hover {
+    text-decoration: none;
+  }
+}
+
 // HELPER CLASSES
 
 .cursor-pointer {

@@ -7,7 +7,7 @@
     <article id="article">
       <h1 class="h2 mb-4">{{ $article->title }}</h1>
       <p class="mb-4">{{ $article->description }}</p>
-      <div class="mb-4 fs-6 d-flex">
+      <div id="article-infos" class="mb-4 fs-6 d-flex">
         @if (!is_null($article->category))
           <div>
             <a class="text-uppercase" href="{{ route('category.show', ['category' => $article->category]) }}">{{ $article->category->name }}</a>
@@ -22,7 +22,7 @@
         <img src="{{ $article->image->url }}" class="img-fluid rounded">
         <figcaption class="credit">{{ $article->image->credit }}</figcaption>
       </figure>
-      <div id="article-content" class="mb-5">{!! $contentInHtml !!}</div>
+      <div id="article-content" class="mb-5">{!! $article->content !!}</div>
       <div id="article-tags" class="d-flex flex-row">
         <span>Mots-clés :</span>
         <ul class="d-flex flex-row p-0 ms-2">
@@ -107,5 +107,5 @@
           </div>
         @endforeach
       </div>
-    </div>  
+    </div>
 @endsection

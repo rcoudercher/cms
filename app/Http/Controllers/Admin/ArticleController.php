@@ -20,7 +20,7 @@ class ArticleController extends Controller
   public function index()
   {
     return view('admin.articles.index')->with([
-      'articles' => Article::orderByDesc('id')->paginate(20),
+      'articles' => Article::orderByDesc('id')->paginate(40),
     ]);
   }
 
@@ -54,7 +54,6 @@ class ArticleController extends Controller
   {
     return view('admin.articles.show')->with([
       'article' => $article,
-      'contentInHtml' => Str::of($article->content)->markdown(),
     ]);
   }
 

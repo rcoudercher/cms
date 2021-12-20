@@ -37,6 +37,7 @@
   </div>
     
   <ul>
+    <li><strong>id:</strong> {{ $article->id }}</li>
     <li><strong>key:</strong> {{ $article->key }}</li>
     <li><strong>created_at:</strong> {{ $article->created_at }}</li>
     <li><strong>updated_at:</strong> {{ $article->updated_at }}</li>
@@ -65,7 +66,7 @@
     <img class="figure-img img-fluid rounded" src="{{ $article->image->url }}">
     <figcaption class="figure-caption">{{ $article->image->credit }}</figcaption>
   </figure>
-  <div>{!! $contentInHtml !!}</div>
+  <div>{!! $article->content !!}</div>
   
   <div class="border-top pt-4">
     <h3 class="h3">

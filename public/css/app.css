@@ -11592,6 +11592,24 @@ blockquote p {
   color: #606060;
 }
 
+#article-infos a {
+  color: #121212;
+  text-decoration: underline;
+  -webkit-text-decoration-color: #606060;
+          text-decoration-color: #606060;
+}
+#article-infos a:hover {
+  text-decoration: none;
+}
+
+#article-content a {
+  color: #8c030e;
+  text-decoration: underline;
+}
+#article-content a:hover {
+  text-decoration: none;
+}
+
 .cursor-pointer {
   cursor: pointer;
 }

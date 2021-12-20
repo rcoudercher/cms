@@ -48,11 +48,23 @@ class FrontController extends Controller
       $headlineSideArticle3,
       $headlineSideArticle4
     ]);
-        
+    
+    $headlineArticleIds = [
+      $mainBlockArticleId->value,
+      $miniViewArticle1Id->value,
+      $miniViewArticle2Id->value,
+      $miniViewArticle3Id->value,
+      $miniViewArticle4Id->value,
+    ];
+            
     return view('front.home')->with([
       'hmArticle' => $hmArticle,
       'headlineSideArticles' => $headlineSideArticles,
-      'articles' => Article::public()->orderByDesc('created_at')->take(10)->get(),
+      'articles' => Article::public()
+                              ->whereNotIn('id', $headlineArticleIds)
+                              ->orderByDesc('published_at')
+                              ->take(10)
+                              ->get(),
     ]);
   }
   
@@ -72,7 +84,6 @@ class FrontController extends Controller
                           
     return view('front.article')->with([
       'article' => $article,
-      'contentInHtml' => Str::of($article->content)->markdown(),
       'recentArticles' => $recentArticles,
       'comments' => Comment::where('article_id', $article->id)
                                 ->approved()

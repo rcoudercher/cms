@@ -64,11 +64,12 @@ class Article extends Model
   
   public function postedAtDifference()
   {
-    return Carbon::parse($this->created_at)->locale('fr')->diffForHumans();
+    return Carbon::parse($this->published_at)->locale('fr')->diffForHumans();
   }
   
   public function postedAtInGoodFrench()
   {
-    return $this->created_at->day . ' ' . $this->created_at->locale('fr')->monthName . ' ' . $this->created_at->year;
+    $dt = Carbon::parse($this->published_at);
+    return $dt->day . ' ' . $dt->locale('fr')->monthName . ' ' . $dt->year;
   }
 }
