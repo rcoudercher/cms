@@ -174,21 +174,6 @@ blockquote p {
   margin-left: 5px;
 }
 
-.credit {
-  font-size: 0.8125rem;
-  line-height: 1.0625rem;
-  margin: 0;
-  display: inline;
-  color: $credit-color;
-  font-size: 0.75rem;
-  line-height: 1rem;
-  letter-spacing: 0.01em;
-}
-
-.comment-created-at {
-  color: $gray;
-}
-
 #article-infos a {
   color: $title-color;
   text-decoration: underline;
@@ -204,6 +189,25 @@ blockquote p {
   &:hover {
     text-decoration: none;
   }
+}
+
+#article-content iframe {
+  margin-bottom: 1.5 rem;
+}
+
+.credit {
+  font-size: 0.8125rem;
+  line-height: 1.0625rem;
+  margin: 0;
+  display: inline;
+  color: $credit-color;
+  font-size: 0.75rem;
+  line-height: 1rem;
+  letter-spacing: 0.01em;
+}
+
+.comment-created-at {
+  color: $gray;
 }
 
 // HELPER CLASSES
