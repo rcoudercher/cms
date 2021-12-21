@@ -131,7 +131,7 @@ class AuthController extends Controller
   private function sendPasswordResetEmail($user, $token)
   {
     // generate the password reset link with the token embedded into it
-    $link = config('app.url') . 'reset-password/' . $token . '?email=' . urlencode($user->email);
+    $link = config('app.url') . '/reset-password/' . $token . '?email=' . urlencode($user->email);
 
     try {
       Mail::to($user->email)->queue(new PasswordResetLinkMail($user, $link));
