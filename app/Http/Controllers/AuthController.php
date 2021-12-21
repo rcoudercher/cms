@@ -112,7 +112,7 @@ class AuthController extends Controller
     ]);
     
     //Generate, the password reset link. The token generated is embedded in the link
-    $link = env('APP_URL') . 'reset-password/' . $token . '?email=' . urlencode($user->email);
+    $link = env('APP_URL', 'https://ldchemin.com') . 'reset-password/' . $token . '?email=' . urlencode($user->email);
     
     
     if ($this->sendPasswordResetEmail($user, $token)) {
