@@ -137,6 +137,7 @@ class AuthController extends Controller
       Mail::to($user->email)->queue(new PasswordResetLinkMail($user, $link));
       return true;
     } catch (\Exception $e) {
+      dd($e);
       return false;
     }
   }
