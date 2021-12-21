@@ -71,9 +71,9 @@ class FrontController extends Controller
   public function article($year, $month, $day, $slug)
   {
     $article = Article::where('slug', $slug)
-                          ->whereYear('created_at', $year)
-                          ->whereMonth('created_at', $month)
-                          ->whereDay('created_at', $day)
+                          ->whereYear('published_at', $year)
+                          ->whereMonth('published_at', $month)
+                          ->whereDay('published_at', $day)
                           ->firstOrFail();
     
     $recentArticles = Article::public()

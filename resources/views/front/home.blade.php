@@ -8,10 +8,10 @@
   <div class="row">
     <div id="headline-main" class="col-md-8 mb-3 pb-2">
       <h2 id="hm-title" class="h2">
-        <a href="{{ route('article.show', ['year' => $hmArticle->created_at->year, 'month' => $hmArticle->created_at->month, 'day' => $hmArticle->created_at->day, 'slug' => $hmArticle->slug]) }}">{{ $hmArticle->title }}</a>
+        <a href="{{ route('article.show', ['year' => $hmArticle->publishedAtYear(), 'month' => $hmArticle->publishedAtMonth(), 'day' => $hmArticle->publishedAtDay(), 'slug' => $hmArticle->slug]) }}">{{ $hmArticle->title }}</a>
       </h2>
       <div id="hm-figure" class="mt-3 pb-2 border-bottom">
-        <a href="{{ route('article.show', ['year' => $hmArticle->created_at->year, 'month' => $hmArticle->created_at->month, 'day' => $hmArticle->created_at->day, 'slug' => $hmArticle->slug]) }}">
+        <a href="{{ route('article.show', ['year' => $hmArticle->publishedAtYear(), 'month' => $hmArticle->publishedAtMonth(), 'day' => $hmArticle->publishedAtDay(), 'slug' => $hmArticle->slug]) }}">
           <figure>
             <img class="img-fluid rounded" src="{{ $hmArticle->image->url }}">
             <figcaption class="credit">{{ $hmArticle->image->credit }}</figcaption>
@@ -30,7 +30,7 @@
             <div>{{ $article->postedAtDifference() }}</div>
           </div>
           <h3 class="h6">
-            <a href="{{ route('article.show', ['year' => $article->created_at->year, 'month' => $article->created_at->month, 'day' => $article->created_at->day, 'slug' => $article->slug]) }}">{{ $article->title }}</a>
+            <a href="{{ route('article.show', ['year' => $article->publishedAtYear(), 'month' => $article->publishedAtMonth(), 'day' => $article->publishedAtDay(), 'slug' => $article->slug]) }}">{{ $article->title }}</a>
           </h3>
         </article>
       @endforeach
