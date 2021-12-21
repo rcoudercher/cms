@@ -9,6 +9,13 @@
   route="{{ route('admin.comments.create') }}" 
   btn-text="create new comment"/>
   
+  <div class="alert alert-primary mt-3" role="alert">
+    <span>READ_ME</span>
+    <ul>
+      <li>comments can be soft deleted & force deleted</li>
+    </ul>
+  </div>
+  
   <h2 class="h3 mt-4">Pending comments</h2>
   <table class="table table-hover my-4">
     <thead>

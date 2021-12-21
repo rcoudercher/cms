@@ -8,6 +8,12 @@
   title="Users index" 
   route="{{ route('admin.users.create') }}" 
   btn-text="create new user"/>
+  <div class="alert alert-primary mt-3" role="alert">
+    <span>READ_ME</span>
+    <ul>
+      <li>users can only be soft deleted</li>
+    </ul>
+  </div>
   <table class="table table-hover mt-4">
     <thead>
       <tr>
