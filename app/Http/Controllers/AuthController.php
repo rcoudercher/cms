@@ -110,11 +110,7 @@ class AuthController extends Controller
       'token' => $token,
       'created_at' => Carbon::now()
     ]);
-    
-    //Generate, the password reset link. The token generated is embedded in the link
-    // $link = config('app.url') . '/reset-password/' . $token . '?email=' . urlencode($user->email);
-    
-    
+        
     if ($this->sendPasswordResetEmail($user, $token)) {
       return redirect()->back()->with('notification', 'Nous vous avons envoyé un email pour changer votre mot de passe');
     } else {
