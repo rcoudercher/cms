@@ -87,4 +87,9 @@ class Article extends Model
   {
     return Carbon::parse($this->published_at)->year;
   }
+  
+  public function link()
+  {
+    return config('app.url') . '/' . $this->publishedAtYear() . '/' . $this->publishedAtMonth() . '/' . $this->publishedAtDay() . '/' . $this->slug;
+  }
 }

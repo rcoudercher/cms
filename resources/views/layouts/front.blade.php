@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     <script src="{{ asset('js/app.js') }}" defer></script>
     <title>@yield('title') | Le Droit Chemin</title>
+    @yield('metadata')
   </head>
   <body>
     <div id="page-wrapper" class="mt-lg-4">

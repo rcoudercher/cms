@@ -2,6 +2,17 @@
 
 @section('title', $article->title)
 
+@section('metadata')
+  <meta property="og:title" content="{{ $article->title }}">
+  <meta property="og:description" content="{{ $article->description }}">
+  <meta property="og:image" content="{{ config('app.url') . $article->image->url }}">
+  {{-- <meta property="og:image:width" content="1024">
+  <meta property="og:image:height" content="538"> --}}
+  <meta property="og:url" content="{{ $article->link() }}">
+  <meta property="og:site_name" content="{{ config('app.name') }}">
+  <meta property="og:type" content="article">
+@endsection
+
 @section('content')
   
     <article id="article">

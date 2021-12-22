@@ -196,7 +196,7 @@ class AuthController extends Controller
     // delete the token
     DB::table('password_resets')->where('email', $user->email)->delete();
     
-    return redirect()->route('home')->with('notification', 'Votre mot de passe a été mis à jour correctement');
+    return redirect()->route('home')->with('notification', 'Votre mot de passe a été mis à jour');
     
   }
   
