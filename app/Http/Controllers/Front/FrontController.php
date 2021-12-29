@@ -13,6 +13,7 @@ use App\Models\Config;
 use App\Models\Person;
 use App\Models\Page;
 use App\Models\Comment;
+use App\Models\Image;
 use Illuminate\Support\Str;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
@@ -75,7 +76,31 @@ class FrontController extends Controller
                           ->whereMonth('published_at', $month)
                           ->whereDay('published_at', $day)
                           ->firstOrFail();
+                          
+                          
+                          
+    // replacing image markup in content
+    $subject = $article->content;    
     
+    // searching for something like '[[image=123]]'
+    $pattern = '/\[\[.*?\]\]/';
+    
+    while (preg_match($pattern, $subject)) {
+      // extract needle
+      preg_match($pattern, $subject, $matches);
+      $needle = $matches[0];
+      // find needle position
+      $pos = strpos($subject,$needle);
+      // get needle id
+      $id = substr($subject, $pos + 8, strlen($needle) - 10);
+      // retrieve image from database
+      $image = Image::find($id);
+      // create HTML for the image
+      $html = '<figure><img src="' . $image->url .'"><figcaption>' . $image->credit .'</figcaption></figure>';
+      // replace needle by html
+      $subject = Str::replaceFirst($needle, $html, $subject);
+    }
+        
     $recentArticles = Article::public()
                             ->where('id', '!=', $article->id)
                             ->latest()
@@ -84,6 +109,7 @@ class FrontController extends Controller
                           
     return view('front.article')->with([
       'article' => $article,
+      'content' => $subject,
       'recentArticles' => $recentArticles,
       'comments' => Comment::where('article_id', $article->id)
                                 ->approved()

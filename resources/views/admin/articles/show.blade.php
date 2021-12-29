@@ -18,7 +18,7 @@
     @endif
     <a href="{{ route('admin.articles.destroy', ['article' => $article]) }}" type="button" class="btn btn-danger" onclick="event.preventDefault(); 
       document.getElementById('destroy-form').submit();">DELETE</a>
-    <a href="{{ route('article.show', ['year' => $article->created_at->year, 'month' => $article->created_at->month, 'day' => $article->created_at->day, 'slug' => $article->slug]) }}" type="button" class="btn btn-primary">FRONT</a>
+    <a href="{{ $article->link() }}" type="button" class="btn btn-primary">FRONT</a>
   </div>
   
   <div class="hidden">

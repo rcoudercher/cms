@@ -2,7 +2,7 @@
   <div class="row">
     <div class="col-8 col-md-4">
       <h2 class="h5">
-        <a href="{{ route('article.show', ['year' => $article->publishedAtYear(), 'month' => $article->publishedAtMonth(), 'day' => $article->publishedAtDay(), 'slug' => $article->slug]) }}">{{ $article->title }}</a>
+        <a href="{{ $article->link() }}">{{ $article->title }}</a>
       </h2>
       <div class="meta d-flex">
         @if (!is_null($article->category))
@@ -14,7 +14,7 @@
     </div>
     <div class="col-md-4 d-none d-md-block">{{ $article->description }}</div>
     <div class="col-4">
-      <a href="{{ route('article.show', ['year' => $article->publishedAtYear(), 'month' => $article->publishedAtMonth(), 'day' => $article->publishedAtDay(), 'slug' => $article->slug]) }}">
+      <a href="{{ $article->link() }}">
         <figure class="mb-0">
           <img class="img-fluid rounded" src="{{ $article->image->url }}">
           <figcaption class="credit">{{ $article->image->credit }}</figcaption>

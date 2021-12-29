@@ -43,7 +43,7 @@
         <td>
           <a class="btn btn-primary" href="{{ route('admin.articles.show', ['article' => $article]) }}">show</a>
           <a class="btn btn-primary" href="{{ route('admin.articles.edit', ['article' => $article]) }}">edit</a>
-          <a class="btn btn-primary" href="{{ route('article.show', ['year' => $article->created_at->year, 'month' => $article->created_at->month, 'day' => $article->created_at->day, 'slug' => $article->slug]) }}">Front</a>
+          <a class="btn btn-primary" href="{{ $article->link() }}">Front</a>
         </td>
       </tr>
     @endforeach

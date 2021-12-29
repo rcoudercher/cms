@@ -6,8 +6,6 @@
   <meta property="og:title" content="{{ $article->title }}">
   <meta property="og:description" content="{{ $article->description }}">
   <meta property="og:image" content="{{ config('app.url') . $article->image->url }}">
-  {{-- <meta property="og:image:width" content="1024">
-  <meta property="og:image:height" content="538"> --}}
   <meta property="og:url" content="{{ $article->link() }}">
   <meta property="og:site_name" content="{{ config('app.name') }}">
   <meta property="og:type" content="article">
@@ -33,7 +31,7 @@
         <img src="{{ $article->image->url }}" class="img-fluid rounded">
         <figcaption class="credit">{{ $article->image->credit }}</figcaption>
       </figure>
-      <div id="article-content" class="mb-5">{!! $article->content !!}</div>
+      <div id="article-content" class="mb-5">{!! $content !!}</div>
       <div id="article-tags" class="d-flex flex-row">
         <span>Mots-clés :</span>
         <ul class="d-flex flex-row p-0 ms-2">

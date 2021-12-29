@@ -162,7 +162,7 @@ blockquote p {
 
 #article {
   max-width: 600px;
-  p {
+  p, blockquote {
     font-size: 19px;
     line-height: 30px;
     margin-bottom: 1.5rem;
@@ -182,19 +182,33 @@ blockquote p {
   }
 }
 
-#article-content a {
-  color: $main-color;
-  text-decoration: underline;
-  &:hover {
-    text-decoration: none;
+#article-content {
+  a {
+    color: $main-color;
+    text-decoration: underline;
+    &:hover {
+      text-decoration: none;
+    }
+  }
+  blockquote {
+    border-left: 3px solid $main-color;
+    padding-left: 20px;
+    margin: 15px;
+  }
+  iframe {
+    margin-bottom: 1.5rem;
+  }
+  img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 0.25rem !important;
+  }
+  figure {
+    margin-bottom: 1.5rem;
   }
 }
 
-#article-content iframe {
-  margin-bottom: 1.5rem;
-}
-
-.credit {
+.credit, #article-content figcaption {
   font-size: 0.8125rem;
   line-height: 1.0625rem;
   margin: 0;
