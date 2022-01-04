@@ -77,7 +77,6 @@ class FrontController extends Controller
                           ->whereDay('published_at', $day)
                           ->firstOrFail();
                           
-                            
     // replacing image markup in content
     $subject = $article->content;    
     

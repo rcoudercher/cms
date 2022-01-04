@@ -61,11 +61,6 @@ Route::prefix('admin')
   Route::prefix('articles')->name('articles.')->group(function () {
     Route::patch('{article}/publish', [ArticleController::class, 'publish'])->name('publish');
     Route::patch('{article}/hide', [ArticleController::class, 'hide'])->name('hide');
-  });  
-  
-  Route::prefix('analytics')->name('analytics.')->group(function () {
-    Route::get('/', [AnalyticsController::class, 'index'])->name('index');
-    Route::get('save-request-logs', [AnalyticsController::class, 'saveYesterdaysRequestLogsToDatabase'])->name('saveRequestLogs');
   });
   
 });
