@@ -93,6 +93,7 @@
       </script>
     @endif
     
+    @include('scripts.analytics')
     
   </body>
 </html>

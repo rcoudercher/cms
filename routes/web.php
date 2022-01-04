@@ -22,6 +22,8 @@ use App\Http\Controllers\Front\CommentController as Comment_Controller;
 use App\Http\Controllers\Front\ProfileController;
 use App\Http\Controllers\AuthController;
 
+use App\Http\Controllers\PageViewController;
+
 
 Route::get('/', [FrontController::class, 'homepage'])->name('home');
 
@@ -48,6 +50,8 @@ Route::prefix('admin')
     'tags' => TagController::class,
     'users' => UserController::class,
   ]);
+  
+  Route::get('analytics', [AnalyticsController::class, 'index'])->name('analytics.index');
   
   // Other comment routes
   Route::prefix('comments')->name('comments.')->group(function () {

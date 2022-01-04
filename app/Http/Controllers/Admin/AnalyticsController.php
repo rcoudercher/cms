@@ -5,62 +5,26 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
+use App\Models\PageView;
 
 class AnalyticsController extends Controller
 {
   public function index()
   {
-    $visitsYesterday = DB::table('request_logs')
-                            ->whereDate('date', Carbon::yesterday())
-                            ->get()
-                            ->countBy('uri')
-                            ->sortDesc();
-                                
-    return view('admin.analytics.index')->with([
-      'visitsYesterday' => $visitsYesterday,
-    ]);
-  }
-  
-  public function saveYesterdaysRequestLogsToDatabase()
-  {
-    $yesterday = Carbon::yesterday();
-    $filePath = storage_path("logs/requests-{$yesterday->format('Y-m-d')}.log");
+    $dt = Carbon::today()->subDay(29);    
+    $pageViewsLast30Days = [];
+    $dates = [];
     
-    // check if yesterday's requests log file exists
-    if (file_exists($filePath)) {
-      
-      // get the date from the most recent entry in the request_logs table
-      $lastEntryDay = Carbon::parse(DB::table('request_logs')->max('date'))->dayOfYear;
-            
-      // check if database already contains yesterday's data
-      if ($lastEntryDay != $yesterday->dayOfYear) {
-        
-        $lines = file($filePath);
-        
-        foreach ($lines as $line) {
-          
-          $lineContent = explode('||', $line);
-                  
-          DB::table('request_logs')->insert([
-            'date' => $lineContent['0'],
-            'method' => $lineContent['1'],
-            'status' => $lineContent['2'],
-            'uri' => $lineContent['3'],
-            'url' => $lineContent['4'],
-            'fullUrl' => $lineContent['5'],
-            'ipAddress' => $lineContent['6'],
-            'referer' => $lineContent['7'],
-            'userAgent' => trim($lineContent['8']),
-            'created_at' => Carbon::now()
-          ]);
-          
-        }
-        return back()->with('message', 'request logs successfully saved to database');
-      } else {
-        return back()->with('error', 'request_logs table already contains data from yesterday');
-      }
-    } else {
-      return back()->with('error', 'file not found');
+    for ($i=0; $i < 30; $i++) {
+      $pageViewsLast30Days[] = PageView::whereDate('created_at', $dt)->count();
+      $dates[] = $dt->format('d-m-Y');
+      $dt->addDay();
     }
+    
+    return view('admin.analytics.index')->with([
+      'pageViews' => PageView::orderByDesc('created_at')->paginate(100),
+      'pageViewsLast30Days' => json_encode($pageViewsLast30Days),
+      'dates' => json_encode($dates),
+    ]);
   }
 }

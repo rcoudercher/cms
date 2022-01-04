@@ -31,6 +31,7 @@
                 <li><a class="dropdown-item" href="{{ route('admin.users.index') }}">Users</a></li>
               </ul>
             </li>
+            <li class="nav-item"><a class="nav-link" href="{{ route('admin.analytics.index') }}">Analytics</a></li>
             <li class="nav-item"><a class="nav-link" href="{{ route('home') }}">FRONT</a></li>
             @auth
               <li class="nav-item">
