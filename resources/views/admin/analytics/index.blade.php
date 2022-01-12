@@ -53,6 +53,7 @@
         <th scope="col">path</th>
         <th scope="col">referrer</th>
         <th scope="col">user_agent</th>
+        <th scope="col">created_at</th>
       </tr>
     </thead>
     <tbody>
@@ -63,6 +64,7 @@
         <td>{{ $pageView->path }}</td>
         <td>{{ $pageView->referrer }}</td>
         <td>{{ $pageView->user_agent }}</td>
+        <td>{{ $pageView->created_at }}</td>
       </tr>
     @endforeach
     </tbody>
