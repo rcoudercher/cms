@@ -10,7 +10,6 @@ use App\Http\Controllers\Admin\CommentController;
 use App\Http\Controllers\Admin\ConfigController;
 use App\Http\Controllers\Admin\ImageController;
 use App\Http\Controllers\Admin\PageController;
-use App\Http\Controllers\Admin\PersonController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\TagController;
 use App\Http\Controllers\Admin\UserController;
@@ -43,7 +42,6 @@ Route::prefix('admin')
     'configs' => ConfigController::class,
     'images' => ImageController::class,
     'pages' => PageController::class,
-    'people' => PersonController::class,
     'roles' => RoleController::class,
     'tags' => TagController::class,
     'users' => UserController::class,
@@ -132,16 +130,6 @@ Route::prefix('compte')
   // show user's comments
   Route::get('commentaires', [ProfileController::class, 'commentsIndex'])->name('comments');
   
-  
-});
-
-
-
-Route::prefix('qui')
-    ->name('people.')
-    ->group(function () {
-      Route::get('/', [FrontController::class, 'peopleIndex'])->name('index');
-      Route::get('{person:slug}', [FrontController::class, 'peopleShow'])->name('show');
 });
 
   // static pages
@@ -158,9 +146,7 @@ Route::get('/contribuer', [FrontController::class, 'contribute'])->name('contrib
 Route::get('/dernieres-nouvelles', [FrontController::class, 'latestNews'])->name('latestNews');
 
   // other
-Route::get('{year}/{month}/{day}/{slug}', [FrontController::class, 'article'])
-  ->where(['year' => '^(19|20)\d{2}$', 'month' => '^(0|[1-9][0-9]{0,1})$', 'day' => '^(0|[1-9][0-9]{0,1})$'])
-  ->name('article.show');
+Route::get('blog/{article:slug}', [FrontController::class, 'article'])->name('article.show');
 
 Route::get('tag/{tag:slug}', [FrontController::class, 'tag'])->name('tag.show');
 Route::get('categorie/{category:slug}', [FrontController::class, 'category'])->name('category.show');

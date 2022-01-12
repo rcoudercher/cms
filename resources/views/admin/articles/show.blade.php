@@ -18,7 +18,7 @@
     @endif
     <a href="{{ route('admin.articles.destroy', ['article' => $article]) }}" type="button" class="btn btn-danger" onclick="event.preventDefault(); 
       document.getElementById('destroy-form').submit();">DELETE</a>
-    <a href="{{ $article->link() }}" type="button" class="btn btn-primary">FRONT</a>
+    <a href="{{ route('article.show', ['article' => $article]) }}" type="button" class="btn btn-primary">FRONT</a>
   </div>
   
   <div class="hidden">
@@ -41,7 +41,6 @@
     <li><strong>key:</strong> {{ $article->key }}</li>
     <li><strong>created_at:</strong> {{ $article->created_at }}</li>
     <li><strong>updated_at:</strong> {{ $article->updated_at }}</li>
-    <li><strong>Public:</strong> {{ $article->public }}</li>
     <li><strong>published_at:</strong> {{ $article->published_at }}</li>
     <li><strong>Author:</strong> <a href="{{ route('admin.authors.show', ['author' => $article->author]) }}">{{ $article->author->name }}</a></li>
     <li>

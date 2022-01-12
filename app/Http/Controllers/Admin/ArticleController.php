@@ -89,7 +89,6 @@ class ArticleController extends Controller
   
   public function publish(Article $article)
   {
-    $article->public = true;
     $article->published_at = Carbon::now();
     $article->save();
     
@@ -99,7 +98,7 @@ class ArticleController extends Controller
   
   public function hide(Article $article)
   {
-    $article->public = false;
+    $article->published_at = null;
     $article->save();
     
     return redirect(route('admin.articles.show', ['article' => $article]))

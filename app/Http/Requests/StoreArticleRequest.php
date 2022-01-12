@@ -39,7 +39,7 @@ class StoreArticleRequest extends FormRequest
       'title' => 'required|max:230',
       'description' => 'required|max:500',
       'content' => 'required|max:5000',
-      'slug' => 'required|max:255',
+      'slug' => 'required|max:255|unique:articles',
     ];
   }
 }

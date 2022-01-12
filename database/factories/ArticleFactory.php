@@ -19,12 +19,10 @@ class ArticleFactory extends Factory
   public function definition()
   {
     $title = $this->faker->sentence(8, false);
-    
-    $public = rand(0,1);
-    
+        
     $published_at = null;
     
-    if ($public) {
+    if (rand(0,1)) {
       $published_at = Carbon::now();
     }
         
@@ -37,7 +35,6 @@ class ArticleFactory extends Factory
       'description' => $this->faker->sentence(20),
       'content' => $this->faker->text(2000),
       'slug' => Str::slug($title, '-'),
-      'public' => $public,
       'published_at' => $published_at,
     ];
   }

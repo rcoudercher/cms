@@ -6,7 +6,7 @@
   <meta property="og:title" content="{{ $article->title }}">
   <meta property="og:description" content="{{ $article->description }}">
   <meta property="og:image" content="{{ config('app.url') . $article->image->url }}">
-  <meta property="og:url" content="{{ $article->link() }}">
+  <meta property="og:url" content="{{ route('article.show', ['article' => $article]) }}">
   <meta property="og:site_name" content="{{ config('app.name') }}">
   <meta property="og:type" content="article">
 @endsection

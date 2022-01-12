@@ -25,7 +25,6 @@
                 <li><a class="dropdown-item" href="{{ route('admin.configs.index') }}">Configs</a></li>
                 <li><a class="dropdown-item" href="{{ route('admin.images.index') }}">Images</a></li>
                 <li><a class="dropdown-item" href="{{ route('admin.pages.index') }}">Pages</a></li>
-                <li><a class="dropdown-item" href="{{ route('admin.people.index') }}">People</a></li>
                 <li><a class="dropdown-item" href="{{ route('admin.roles.index') }}">Roles</a></li>
                 <li><a class="dropdown-item" href="{{ route('admin.tags.index') }}">Tags</a></li>
                 <li><a class="dropdown-item" href="{{ route('admin.users.index') }}">Users</a></li>

@@ -69,13 +69,12 @@ class FrontController extends Controller
     ]);
   }
   
-  public function article($year, $month, $day, $slug)
+  public function article(Article $article)
   {
-    $article = Article::where('slug', $slug)
-                          ->whereYear('published_at', $year)
-                          ->whereMonth('published_at', $month)
-                          ->whereDay('published_at', $day)
-                          ->firstOrFail();
+    // shows an error if the article is not public
+    if (!$article->isPublic()) {
+      abort(404);
+    }
                           
     // replacing image markup in content
     $subject = $article->content;    
@@ -137,20 +136,6 @@ class FrontController extends Controller
     return view('front.author')->with([
       'author' => $author,
       'articles' => $author->publicArticles()->paginate(10),
-    ]);
-  }
-  
-  public function peopleIndex()
-  {
-    return view('front.people.index')->with([
-      'people' => Person::all(),
-    ]);
-  }
-  
-  public function peopleShow(Person $person)
-  {
-    return view('front.people.show')->with([
-      'person' => $person
     ]);
   }
   

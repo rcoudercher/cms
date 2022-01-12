@@ -8,10 +8,10 @@
   <div class="row">
     <div id="headline-main" class="col-md-8 mb-3 pb-2">
       <h2 id="hm-title" class="h2">
-        <a href="{{ $hmArticle->link() }}">{{ $hmArticle->title }}</a>
+        <a href="{{ route('article.show', ['article' => $hmArticle]) }}">{{ $hmArticle->title }}</a>
       </h2>
       <div id="hm-figure" class="mt-3 pb-2 border-bottom">
-        <a href="{{ $hmArticle->link() }}">
+        <a href="{{ route('article.show', ['article' => $hmArticle]) }}">
           <figure>
             <img class="img-fluid rounded" src="{{ $hmArticle->image->url }}">
             <figcaption class="credit">{{ $hmArticle->image->credit }}</figcaption>
@@ -30,7 +30,7 @@
             <div>{{ $article->postedAtDifference() }}</div>
           </div>
           <h3 class="h6">
-            <a href="{{ $article->link() }}">{{ $article->title }}</a>
+            <a href="{{ route('article.show', ['article' => $article]) }}">{{ $article->title }}</a>
           </h3>
         </article>
       @endforeach

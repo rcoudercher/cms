@@ -19,7 +19,6 @@ class Article extends Model
     'description', 
     'content', 
     'slug', 
-    'public',
     'published_at',
   ];
   
@@ -54,12 +53,12 @@ class Article extends Model
   
   public function scopePublic($query)
   {
-    return $query->where('public', true);
+    return $query->whereNotNull('published_at');
   }
   
   public function isPublic()
   {
-    return $this->public;
+    return is_null($this->published_at) ? false : true;
   }
   
   public function postedAtDifference()
@@ -73,23 +72,19 @@ class Article extends Model
     return $dt->day . ' ' . $dt->locale('fr')->monthName . ' ' . $dt->year;
   }
   
-  public function publishedAtDay()
-  {
-    return Carbon::parse($this->published_at)->day;
-  }
+  // public function publishedAtDay()
+  // {
+  //   return Carbon::parse($this->published_at)->day;
+  // }
   
-  public function publishedAtMonth()
-  {
-    return Carbon::parse($this->published_at)->month;
-  }
+  // public function publishedAtMonth()
+  // {
+  //   return Carbon::parse($this->published_at)->month;
+  // }
   
-  public function publishedAtYear()
-  {
-    return Carbon::parse($this->published_at)->year;
-  }
+  // public function publishedAtYear()
+  // {
+  //   return Carbon::parse($this->published_at)->year;
+  // }
   
-  public function link()
-  {
-    return config('app.url') . '/' . $this->publishedAtYear() . '/' . $this->publishedAtMonth() . '/' . $this->publishedAtDay() . '/' . $this->slug;
-  }
 }
