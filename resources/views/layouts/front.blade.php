@@ -92,8 +92,6 @@
         notification.show(message, 'FERMER', null);
       </script>
     @endif
-    
-    @include('scripts.analytics')
-    
+        
   </body>
 </html>
