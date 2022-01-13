@@ -27,42 +27,16 @@ class FrontController extends Controller
 {  
   public function homepage(Request $request)
   {
-    // hmArticle = Headline Main Article
-    $mainBlockArticleId = Config::where('name', 'main-block-article')->firstOrFail();
-    $hmArticle = Article::where('id', $mainBlockArticleId->value)->firstOrFail();
-    
-    $miniViewArticle1Id = Config::where('name', 'mini-view-article-1')->firstOrFail();
-    $headlineSideArticle1 = Article::where('id', $miniViewArticle1Id->value)->firstOrFail();
-    
-    $miniViewArticle2Id = Config::where('name', 'mini-view-article-2')->firstOrFail();
-    $headlineSideArticle2 = Article::where('id', $miniViewArticle2Id->value)->firstOrFail();
-    
-    $miniViewArticle3Id = Config::where('name', 'mini-view-article-3')->firstOrFail();
-    $headlineSideArticle3 = Article::where('id', $miniViewArticle3Id->value)->firstOrFail();
-    
-    $miniViewArticle4Id = Config::where('name', 'mini-view-article-4')->firstOrFail();
-    $headlineSideArticle4 = Article::where('id', $miniViewArticle4Id->value)->firstOrFail();
-    
-    $headlineSideArticles = collect([
-      $headlineSideArticle1,
-      $headlineSideArticle2,
-      $headlineSideArticle3,
-      $headlineSideArticle4
-    ]);
-    
-    $headlineArticleIds = [
-      $mainBlockArticleId->value,
-      $miniViewArticle1Id->value,
-      $miniViewArticle2Id->value,
-      $miniViewArticle3Id->value,
-      $miniViewArticle4Id->value,
-    ];
+    // hero articles
+    $heroArticles = Article::public()
+                      ->orderByDesc('published_at')
+                      ->take(8)
+                      ->get();
             
     return view('front.home')->with([
-      'hmArticle' => $hmArticle,
-      'headlineSideArticles' => $headlineSideArticles,
+      'heroArticles' => $heroArticles,
       'articles' => Article::public()
-                              ->whereNotIn('id', $headlineArticleIds)
+                              ->whereDate('published_at', '<', $heroArticles[7]->published_at)
                               ->orderByDesc('published_at')
                               ->take(10)
                               ->get(),

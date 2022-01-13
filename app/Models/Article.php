@@ -71,20 +71,4 @@ class Article extends Model
     $dt = Carbon::parse($this->published_at);
     return $dt->day . ' ' . $dt->locale('fr')->monthName . ' ' . $dt->year;
   }
-  
-  // public function publishedAtDay()
-  // {
-  //   return Carbon::parse($this->published_at)->day;
-  // }
-  
-  // public function publishedAtMonth()
-  // {
-  //   return Carbon::parse($this->published_at)->month;
-  // }
-  
-  // public function publishedAtYear()
-  // {
-  //   return Carbon::parse($this->published_at)->year;
-  // }
-  
 }

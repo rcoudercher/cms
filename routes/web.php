@@ -147,7 +147,6 @@ Route::get('/dernieres-nouvelles', [FrontController::class, 'latestNews'])->name
 
   // other
 Route::get('blog/{article:slug}', [FrontController::class, 'article'])->name('article.show');
-
 Route::get('tag/{tag:slug}', [FrontController::class, 'tag'])->name('tag.show');
 Route::get('categorie/{category:slug}', [FrontController::class, 'category'])->name('category.show');
 Route::get('auteur/{author:slug}', [FrontController::class, 'author'])->name('author.show');

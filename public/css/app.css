@@ -11341,15 +11341,15 @@ h1 a, .h1 a, h2 a, .h2 a, h3 a, .h3 a, h4 a, .h4 a, h5 a, .h5 a, h6 a, .h6 a {
 }
 .hero-el-category a {
   padding: 5px 8px 4px;
-  background-color: #612a46;
-  color: #f8f8f6;
+  background-color: #da0050;
+  color: #fff;
   transition: background-color;
   text-decoration: none;
   text-transform: uppercase;
   font-size: 0.7rem !important;
 }
 .hero-el-category a:hover {
-  background-color: #da0050;
+  background-color: #a7003d;
 }
 
 .hero-el-title {
@@ -11376,6 +11376,10 @@ h1 a, .h1 a, h2 a, .h2 a, h3 a, .h3 a, h4 a, .h4 a, h5 a, .h5 a, h6 a, .h6 a {
 
 .relative {
   position: relative;
+}
+
+.hero-el-byline {
+  font-size: 0.8em;
 }
 
 @media (max-width: 575px) {
@@ -11408,6 +11412,16 @@ h1 a, .h1 a, h2 a, .h2 a, h3 a, .h3 a, h4 a, .h4 a, h5 a, .h5 a, h6 a, .h6 a {
   }
 }
 @media (min-width: 576px) {
+  #hero-el-1:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    border-top: 65px solid #fff;
+    border-left: 65px solid #da0050;
+    width: 0;
+  }
+
   .hero-el-title {
     font-size: 1.1em;
   }
@@ -11454,7 +11468,7 @@ h1 a, .h1 a, h2 a, .h2 a, h3 a, .h3 a, h4 a, .h4 a, h5 a, .h5 a, h6 a, .h6 a {
 }
 @media (min-width: 576px) and (max-width: 767px) {
   .hero-w-sm-50 {
-    width: calc((100vw - 0.25rem) * 0.5);
+    width: calc((100vw - 0.75rem) * 0.5);
   }
 
   #hero-el-4 .hero-el-body {
@@ -11491,7 +11505,7 @@ h1 a, .h1 a, h2 a, .h2 a, h3 a, .h3 a, h4 a, .h4 a, h5 a, .h5 a, h6 a, .h6 a {
 }
 @media (min-width: 768px) and (max-width: 991px) {
   .hero-w-md-33 {
-    width: calc((100vw - 0.5rem) / 3);
+    width: calc((100vw - 1rem) / 3);
   }
 
   #hero-el-5 {
@@ -11532,19 +11546,19 @@ h1 a, .h1 a, h2 a, .h2 a, h3 a, .h3 a, h4 a, .h4 a, h5 a, .h5 a, h6 a, .h6 a {
 }
 @media (min-width: 992px) {
   .hero-w-lg-25-1 {
-    width: calc((100vw - 0.25rem) * 0.25);
+    width: calc((100vw - 0.75rem) * 0.25);
   }
 
   .hero-w-lg-25-2 {
-    width: calc((100vw - 0.5rem) * 0.25);
+    width: calc((100vw - 1rem) * 0.25);
   }
 
   .hero-w-lg-50 {
-    width: calc((100vw - 0.5rem) * 0.5);
+    width: calc((100vw - 1rem) * 0.5);
   }
 
   .hero-w-lg-75 {
-    width: calc((100vw - 0.25rem) * 0.75);
+    width: calc((100vw - 0.75rem) * 0.75);
   }
 
   #hero-el-4 .hero-el-body,
@@ -11580,5 +11594,10 @@ h1 a, .h1 a, h2 a, .h2 a, h3 a, .h3 a, h4 a, .h4 a, h5 a, .h5 a, h6 a, .h6 a {
   #hero-el-5 .hero-el-body .hero-el-category {
     position: absolute;
     top: -13px;
+  }
+
+  #hero-el-2 {
+    position: relative;
+    top: 65px;
   }
 }

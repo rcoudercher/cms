@@ -4,7 +4,8 @@
 
 $white: #fff;
 $black: #000;
-$link-color: #da0050;
+$border-color: #ccc;
+$main-color: #da0050;
 
 h1 a, h2 a, h3 a, h4 a, h5 a, h6 a {
   color: currentColor;
@@ -18,15 +19,15 @@ h1 a, h2 a, h3 a, h4 a, h5 a, h6 a {
   margin-bottom: 0.3rem;
   a {
     padding: 5px 8px 4px;
-    background-color: #612a46;
-    color: #f8f8f6;
+    background-color: $main-color;
+    color: $white;
     transition: background-color;
     text-decoration: none;
     text-transform: uppercase;
     font-size: 0.7rem !important;
   }
   a:hover {
-    background-color: #da0050;
+    background-color: darken($main-color, 10%);
   }
 }
 
@@ -38,17 +39,17 @@ h1 a, h2 a, h3 a, h4 a, h5 a, h6 a {
   }
   a:hover {
     text-decoration: none;
-    color: darken($link-color, 10%);
+    color: darken($main-color, 10%);
   }
 }
 
 .hero-el-author {
-  color: $link-color;
+  color: $main-color;
   text-decoration: none;
 }
 
 .hero-el-author:hover {
-  color: darken($link-color, 10%);
+  color: darken($main-color, 10%);
   text-decoration: none;
 }
 
@@ -56,9 +57,13 @@ h1 a, h2 a, h3 a, h4 a, h5 a, h6 a {
   position: relative;
 }
 
+.hero-el-byline {
+  font-size: .8em;
+}
+
 @media (max-width: 575px) {
   .hero-el {
-    border-top: 1px solid #ccc;
+    border-top: 1px solid $border-color;
   }
   #hero-el-1 {
     border-top: 0;
@@ -84,6 +89,16 @@ h1 a, h2 a, h3 a, h4 a, h5 a, h6 a {
 }
 
 @media (min-width: 576px) {
+  #hero-el-1:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    border-top: 65px solid $white;
+    border-left: 65px solid $main-color;
+    width: 0;
+  }
+
   .hero-el-title {
     font-size: 1.1em;
   }
@@ -129,7 +144,7 @@ h1 a, h2 a, h3 a, h4 a, h5 a, h6 a {
 
 @media (min-width: 576px) and (max-width: 767px) {
   .hero-w-sm-50 {
-    width: calc((100vw - 0.25rem) * 0.5);
+    width: calc((100vw - 0.75rem) * 0.5);
   }
   #hero-el-4 .hero-el-body {
     position: absolute;
@@ -166,7 +181,7 @@ h1 a, h2 a, h3 a, h4 a, h5 a, h6 a {
 
 @media (min-width: 768px) and (max-width: 991px) {
   .hero-w-md-33 {
-    width: calc((100vw - 0.5rem) / 3);
+    width: calc((100vw - 1rem) / 3);
   }
   #hero-el-5 {
     max-height: 350px;
@@ -208,19 +223,19 @@ h1 a, h2 a, h3 a, h4 a, h5 a, h6 a {
 
 @media (min-width: 992px) {
   .hero-w-lg-25-1 {
-    width: calc((100vw - 0.25rem) * 0.25);
+    width: calc((100vw - 0.75rem) * 0.25);
   }
 
   .hero-w-lg-25-2 {
-    width: calc((100vw - 0.5rem) * 0.25);
+    width: calc((100vw - 1rem) * 0.25);
   }
 
   .hero-w-lg-50 {
-    width: calc((100vw - 0.5rem) * 0.50);
+    width: calc((100vw - 1rem) * 0.50);
   }
 
   .hero-w-lg-75 {
-    width: calc((100vw - 0.25rem) * 0.75);
+    width: calc((100vw - 0.75rem) * 0.75);
   }
 
   #hero-el-4 .hero-el-body,
@@ -254,5 +269,8 @@ h1 a, h2 a, h3 a, h4 a, h5 a, h6 a {
       top: -13px;
     }
   }
+  #hero-el-2 {
+    position: relative;
+    top: 65px;
+  } 
 }
-

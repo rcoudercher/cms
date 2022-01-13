@@ -1,97 +1,64 @@
 <!doctype html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
-    <script src="{{ asset('js/app.js') }}" defer></script>
-    <title>@yield('title') | Le Droit Chemin</title>
-    @yield('metadata')
-  </head>
-  <body>
-    <div id="page-wrapper" class="mt-lg-4">
-      
-      <header id="mobile-nav" class="fixed-top py-3 d-lg-none wrapper-fluid bg-white border-bottom">
-        <div id="mobile-nav-top" class="clearfix">
-          <div class="float-start">
-            @include('partials.logo')
-          </div>
-          <div class="float-end">
-            <input class="menu-btn" type="checkbox" id="menu-btn" />
-            <label class="menu-icon p-1" for="menu-btn" onclick="toggleMobileNavDropdown()">
-              <span class="navicon" />
-            </label>
-          </div>
-        </div>
-        <div id="mobile-nav-dropdown" class="mt-4">
-          <div class="m-0 p-0 navbar-nav-scroll">
-            @include('partials.nav-links')
-          </div>
-        </div>
-      </header>
-      
-      <div>
-        <div id="desktop-nav" class="d-none d-lg-block fixed-top h-100 mt-4">
-          <div class="logo mb-4">
-            <a href="{{ route('home') }}">le Droit<br>Chemin</a>
-          </div>
-          <div class="m-0 p-0 navbar-nav-scroll">
-            @include('partials.nav-links')
-          </div>
-        </div>
-        <div class="content">
-          <main>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- Bootstrap CSS -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+        <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+        <title>Hello, world!</title>
+        <title>@yield('title')</title>
+    </head>
+    <body>
+        <header>
+            <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+                <div class="container-fluid">
+                    <a class="navbar-brand" href="#">Navbar</a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="#">Home</a>
+                    </li>
+                    <li class="nav-item">
+                    <a class="nav-link" href="#">Link</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    Dropdown
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <li><a class="dropdown-item" href="#">Action</a></li>
+                    <li><a class="dropdown-item" href="#">Another action</a></li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li><a class="dropdown-item" href="#">Something else here</a></li>
+                    </ul>
+                    </li>
+                    </ul>
+                    </div>
+                </div>
+            </nav>
+        </header>
+        <main>
             @yield('content')
-          </main>
-          <footer id="site-footer" class="border-top border-3 pt-5 pb-4 px-lg-0 mt-5">
-            <div class="row">
-              <div class="col-sm-6 col-md-4">
-                <h6 class="h6">À propos</h5>
-                <ul class="m-0 p-0">
-                  <li class="menu-item"><a href="{{ route('about') }}">le Droit Chemin</a></li>
-                  <li class="menu-item"><a href="{{ route('contact') }}">Contact</a></li>
-                  <li class="menu-item"><a href="{{ route('legal') }}">Mentions légales</a></li>
-                  <li class="menu-item"><a href="{{ route('privacy') }}">Confidentialité</a></li>
-                  <li class="menu-item"><a href="{{ route('comment-rules') }}">Charte Commentaires</a></li>
-                </ul>
-              </div>
-              <div class="col-sm-6 col-md-4 mt-5 mt-sm-0">
-                <h6 class="h6">Nous soutenir</h5>
-                <ul class="m-0 p-0">
-                  <li class="menu-item"><a href="{{ route('donation') }}">Faire un don</a></li>
-                  <li class="menu-item"><a href="{{ route('contribute') }}">Contribuer</a></li>
-                </ul>
-              </div>
-              <div class=" col-md-4 mt-5 mt-md-0">
-                <h6 class="h6">Réseaux</h5>
-                <ul class="m-0 p-0">
-                  <li class="menu-item"><a href="https://twitter.com/ldchemin">Twitter</a></li>
-                  <li class="menu-item"><a href="https://gab.com/ldchemin/">Gab</a></li>
-                  <li class="menu-item"><a href="https://gettr.com/user/ldchemin">GETTR</a></li>
-                </ul>
-              </div>
-            </div>
-            <div class="mt-5">
-              <p class="text-center text-md-start fs-6 fst-italic">© 2021-2022 Le Droit Chemin - Tous droits réservés</p>
-            </div>
-          </footer>
-        </div>
-      </div>
-    </div>
-    
-    {{-- shows a notification if there is one --}}
-    @if (session()->has('notification'))
-      <div id="msgbox-area" class="msgbox-area"></div>
-      @include('scripts.message-box')
-      <script type="text/javascript">
+        </main>
+        <footer></footer>
+        {{-- shows a notification if there is one --}}
+        @if (session()->has('notification'))
+        <div id="msgbox-area" class="msgbox-area"></div>
+        @include('scripts.message-box')
+        <script type="text/javascript">
         let message = @json(session('notification'));
         let notification = new MessageBox("#msgbox-area", {
-          closeTime: 10000,
-          hideCloseButton: false
+        closeTime: 10000,
+        hideCloseButton: false
         });
         notification.show(message, 'FERMER', null);
-      </script>
-    @endif
-        
-  </body>
+        </script>
+        @endif
+        <!-- Bootstrap Bundle with Popper -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    </body>
 </html>
