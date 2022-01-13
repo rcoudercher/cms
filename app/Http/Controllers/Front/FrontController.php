@@ -38,7 +38,7 @@ class FrontController extends Controller
       'articles' => Article::public()
                               ->whereDate('published_at', '<', $heroArticles[7]->published_at)
                               ->orderByDesc('published_at')
-                              ->take(10)
+                              ->take(20)
                               ->get(),
     ]);
   }

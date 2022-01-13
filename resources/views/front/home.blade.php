@@ -8,7 +8,7 @@
             <div id="hero-el-1" class="relative hero-w-lg-75 d-flex flex-sm-column py-2 py-sm-0 mb-sm-1 hero-el">
                 <div class="hero-el-image-wrapper">
                     <a href="{{ route('article.show', ['article' => $heroArticles[0]]) }}">
-                        <img class="img-fluid" src="https://cdn.vox-cdn.com/thumbor/UWyR71QpQWCRN38z0E1O1LjyBCs=/0x0:4096x1716/2320x1305/filters:focal(1668x225:2322x879):format(webp)/cdn.vox-cdn.com/uploads/chorus_image/image/70379510/spider_man_into_the_spider_verse_dom_SpiderVerse_trlb795.1015_DH_v2.0.jpg">
+                        <img class="img-fluid" src="{{ $heroArticles[0]->image->url }}">
                     </a>
                 </div>
                 <div class="hero-el-body">
@@ -255,5 +255,29 @@
             </div>
         </div>
     </div>
-    <div id="feed">feed</div>
+    <div id="feed" class="mx-sm-3 mt-5 d-flex">
+        <div id="feed-river">
+            <div>
+                <h2 id="feed-river-title" class="ms-3">Derniers articles</h2>
+            </div>
+            <div id="feed-elements">
+                @foreach ($articles as $article)
+                    <div class="feed-el py-2 d-flex">
+                        <div class="feed-el-image">
+                            <a href="{{ route('article.show', ['article' => $article]) }}">
+                                <img class="img-fluid" src="{{ $article->image->url }}">
+                            </a>
+                        </div>
+                        <div class="feed-el-body mx-2">
+                            <h2 class="feed-el-title">
+                                <a href="{{ route('article.show', ['article' => $article]) }}">{{ $article->title }}</a>
+                            </h2>
+                            <div class="feed-el-byline">Par <a class="feed-el-author" href="{{ route('author.show', ['author' => $article->author]) }}">{{ $article->author->name }}</a> | {{ $article->postedAtDifference() }} | {{ $article->comments()->approved()->count() }} commentaires</div>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+        </div>
+        <div id="feed-side" class="d-none d-lg-block"></div>
+    </div>
 @endsection
