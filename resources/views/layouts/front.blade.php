@@ -16,7 +16,14 @@
             <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
                 <div class="container-fluid">
                     <a class="navbar-brand" href="{{ route('home') }}">
-                        <img src="/docs/5.1/assets/brand/bootstrap-logo.svg" alt="" width="30" height="24">
+                        @php
+                            $logo = \App\Models\Config::where('name', 'logo')->first();
+                        @endphp
+                        @if (is_null($logo))
+                            <a class="navbar-brand" href="#">LOGO</a>
+                        @else
+                            <img src="{{ $logo->value }}" height="40">
+                        @endif
                     </a>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>

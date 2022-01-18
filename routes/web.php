@@ -13,7 +13,8 @@ use App\Http\Controllers\Admin\PageController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\TagController;
 use App\Http\Controllers\Admin\UserController;
-use App\Http\Controllers\Admin\AnalyticsController;
+use App\Http\Controllers\Admin\SettingsController;
+use App\Http\Controllers\Admin\LogoController;
 
 // Front controllers
 use App\Http\Controllers\Front\FrontController;
@@ -46,6 +47,22 @@ Route::prefix('admin')
     'tags' => TagController::class,
     'users' => UserController::class,
   ]);
+
+  // Settings routes
+  Route::prefix('settings')->name('settings.')->group(function () {
+    Route::get('/', [SettingsController::class, 'index'])->name('index');
+
+
+    Route::prefix('logo')->name('logo.')->group(function () {
+      Route::get('/', [LogoController::class, 'index'])->name('index');
+      Route::post('/', [LogoController::class, 'store'])->name('store');
+      Route::get('edit', [LogoController::class, 'edit'])->name('edit');
+      Route::patch('/', [LogoController::class, 'update'])->name('update');
+      Route::delete('/', [LogoController::class, 'delete'])->name('delete');
+    });
+
+    
+  });
     
   // Other comment routes
   Route::prefix('comments')->name('comments.')->group(function () {

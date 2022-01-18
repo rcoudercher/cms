@@ -33,14 +33,13 @@
               </ul>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="{{ route('home') }}"><i class="bi bi-gear-fill"></i> Settings</a>
+              <a class="nav-link" href="{{ route('admin.settings.index') }}"><i class="bi bi-gear-fill"></i> Settings</a>
             </li>
           </ul>
           <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
             <li class="nav-item"><a class="nav-link" href="{{ route('home') }}">FRONT</a></li>
             @auth
               <li class="nav-item">
-                
                 <a class="nav-link" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                   Logout <i class="bi bi-box-arrow-right"></i>
                 </a>
