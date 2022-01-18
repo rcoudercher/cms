@@ -19,6 +19,11 @@ class LogoController extends Controller
 
     public function store(Request $request)
     {
+        // validate the uploaded file
+        $request->validate([
+            'image' => 'required|file|image|max:10000',
+        ]);
+
         // use OBJECT STORAGE to store the image
         $path = $request->file('image')->store('public');
 
@@ -40,6 +45,11 @@ class LogoController extends Controller
     
     public function update(Request $request)
     {
+        // validate the uploaded file
+        $request->validate([
+            'image' => 'required|file|image|max:10000',
+        ]);
+        
         // retrieve logo config
         $config = Config::where('name', 'logo')->firstOrFail();
 
