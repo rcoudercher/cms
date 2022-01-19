@@ -19,6 +19,7 @@ class CreateArticlesTable extends Migration
       $table->text('content');
       $table->string('slug')->unique();
       $table->dateTime('published_at')->nullable()->default(null);
+      $table->dateTime('scheduled_at')->nullable()->default(null);
       $table->timestamps();
     });
   }

@@ -13,6 +13,7 @@
       <a href="{{ route('admin.articles.hide', ['article' => $article]) }}" type="button" class="btn btn-warning" onclick="event.preventDefault(); 
         document.getElementById('hide-form').submit();">HIDE</a>
     @else
+      <a href="{{ route('admin.articles.schedule.edit', ['article' => $article]) }}" type="button" class="btn btn-warning">SCHEDULE</a>
       <a href="{{ route('admin.articles.publish', ['article' => $article]) }}" type="button" class="btn btn-success" onclick="event.preventDefault(); 
         document.getElementById('publish-form').submit();">PUBLISH</a>
     @endif
@@ -42,6 +43,7 @@
     <li><strong>created_at:</strong> {{ $article->created_at }}</li>
     <li><strong>updated_at:</strong> {{ $article->updated_at }}</li>
     <li><strong>published_at:</strong> {{ $article->published_at }}</li>
+    <li><strong>scheduled_at:</strong> {{ $article->scheduled_at }}</li>
     <li><strong>Author:</strong> <a href="{{ route('admin.authors.show', ['author' => $article->author]) }}">{{ $article->author->name }}</a></li>
     <li>
       @if (is_null($article->category))

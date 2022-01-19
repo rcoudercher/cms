@@ -36,6 +36,7 @@ class ArticleFactory extends Factory
       'content' => $this->faker->text(2000),
       'slug' => Str::slug($title, '-'),
       'published_at' => $published_at,
+      'scheduled_at' => null,
     ];
   }
 }

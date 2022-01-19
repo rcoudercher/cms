@@ -76,6 +76,10 @@ Route::prefix('admin')
   Route::prefix('articles')->name('articles.')->group(function () {
     Route::patch('{article}/publish', [ArticleController::class, 'publish'])->name('publish');
     Route::patch('{article}/hide', [ArticleController::class, 'hide'])->name('hide');
+
+    Route::get('{article}/schedule', [ArticleController::class, 'editSchedule'])->name('schedule.edit');
+    Route::patch('{article}/schedule', [ArticleController::class, 'updateSchedule'])->name('schedule.update');
+    
   });
   
 });

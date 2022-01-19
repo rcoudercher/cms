@@ -46,7 +46,7 @@ class ArticleController extends Controller
   {
     $article = Article::create($request->validated()); // create new model with validated data
     $article->tags()->sync($request->input('tags')); // sync article's tags
-    return redirect(route('admin.articles.index'))
+    return redirect()->route('admin.articles.index')
     ->with('message', 'Article created successfully.'); // return view with message
   }
 
@@ -71,7 +71,7 @@ class ArticleController extends Controller
   {
     $article->update($request->validated()); // update model
     $article->tags()->sync($request->input('tags')); // sync article's tags
-    return redirect(route('admin.articles.show', ['article' => $article]))
+    return redirect()->route('admin.articles.show', ['article' => $article])
     ->with('message', 'Article updated successfully.'); // return view with message
   }
 
@@ -83,7 +83,7 @@ class ArticleController extends Controller
     
     ArticleDestroyedEvent::dispatch($id);
     
-    return redirect(route('admin.articles.index'))
+    return redirect()->route('admin.articles.index')
     ->with('message', 'Article deleted successfully.');
   }
   
@@ -92,7 +92,7 @@ class ArticleController extends Controller
     $article->published_at = Carbon::now();
     $article->save();
     
-    return redirect(route('admin.articles.show', ['article' => $article]))
+    return redirect()->route('admin.articles.show', ['article' => $article])
     ->with('message', 'Article published successfully'); // return view with message
   }
   
@@ -101,8 +101,40 @@ class ArticleController extends Controller
     $article->published_at = null;
     $article->save();
     
-    return redirect(route('admin.articles.show', ['article' => $article]))
+    return redirect()->route('admin.articles.show', ['article' => $article])
     ->with('message', 'Article hidden successfully'); // return view with message
   }
+
+  public function editSchedule(Article $article)
+  {
+    if ($article->isPublic()) {
+      return redirect()->route('admin.articles.index')
+      ->with('message', 'This article is already published');
+    }
+
+    $dt = Carbon::now();
+    $now = $dt->format('Y-m-d') . 'T' . $dt->format('H:i');
+
+    return view('admin.articles.schedule')->with([
+      'article' => $article,
+      'now' => $now,
+    ]);
+  }
+  
+  public function updateSchedule(Request $request, Article $article)
+  {
+    // validate the form inputs
+    $request->validate([
+      'scheduled_at' => 'required|date|after:now',
+    ]);
+
+    // update config
+    $article->scheduled_at = $request->input('scheduled_at');
+    $article->save();
+
+    return redirect()->route('admin.articles.index')
+    ->with('message', 'Article scheduled successfully'); // return view with message
+  }
+  
   
 }

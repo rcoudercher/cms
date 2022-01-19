@@ -20,6 +20,7 @@ class Article extends Model
     'content', 
     'slug', 
     'published_at',
+    'scheduled_at',
   ];
   
   // get the author that owns the article
@@ -60,6 +61,11 @@ class Article extends Model
   {
     return is_null($this->published_at) ? false : true;
   }
+
+  public function isScheduled()
+  {
+    return is_null($this->scheduled_at) ? false : true;
+  }
   
   public function postedAtDifference()
   {
@@ -70,5 +76,10 @@ class Article extends Model
   {
     $dt = Carbon::parse($this->published_at);
     return $dt->day . ' ' . $dt->locale('fr')->monthName . ' ' . $dt->year;
+  }
+
+  public function scheduledAtDifference()
+  {
+    return Carbon::parse($this->scheduled_at)->locale('en')->diffForHumans();
   }
 }

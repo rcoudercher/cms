@@ -29,6 +29,8 @@
         <td>
           @if ($article->isPublic())
             <span class="badge bg-success">published</span>
+          @elseif ($article->isScheduled())
+            <span class="badge bg-info text-dark">scheduled {{ $article->scheduledAtDifference() }}</span>
           @else
             <span class="badge bg-warning text-dark">hidden</span>
           @endif
@@ -43,7 +45,9 @@
         <td>
           <a class="btn btn-primary" href="{{ route('admin.articles.show', ['article' => $article]) }}">show</a>
           <a class="btn btn-primary" href="{{ route('admin.articles.edit', ['article' => $article]) }}">edit</a>
-          <a class="btn btn-primary" href="{{ route('article.show', ['article' => $article]) }}">Front</a>
+          @if (!$article->isPublic())
+            <a class="btn btn-primary" href="{{ route('admin.articles.schedule.edit', ['article' => $article]) }}">schedule</a>
+          @endif
         </td>
       </tr>
     @endforeach
