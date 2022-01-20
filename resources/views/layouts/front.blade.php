@@ -1,6 +1,33 @@
 @php
     $logo = \App\Models\Config::where('name', 'logo')->first();
     $gaTrackingCode = \App\Models\Config::where('name', 'ga-tracking-code')->first();
+    $color = \App\Models\Config::where('name', 'color')->first();
+    is_null($color) ? $color = '#da0050' : $color = $color->value;
+
+    function adjustBrightness($hex, $steps) {
+        // Steps should be between -255 and 255. Negative = darker, positive = lighter
+        $steps = max(-255, min(255, $steps));
+
+        // Normalize into a six character long hex string
+        $hex = str_replace('#', '', $hex);
+        if (strlen($hex) == 3) {
+        $hex = str_repeat(substr($hex,0,1), 2).str_repeat(substr($hex,1,1), 2).str_repeat(substr($hex,2,1), 2);
+        }
+
+        // Split into three parts: R, G and B
+        $color_parts = str_split($hex, 2);
+        $return = '#';
+
+        foreach ($color_parts as $color) {
+        $color   = hexdec($color); // Convert to decimal
+        $color   = max(0,min(255,$color + $steps)); // Adjust color
+        $return .= str_pad(dechex($color), 2, '0', STR_PAD_LEFT); // Make two char hex code
+        }
+
+        return $return;
+    }
+
+    $dark = adjustBrightness($color, -20);
 @endphp
 <!doctype html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
@@ -15,6 +42,36 @@
         <link rel="stylesheet" href="{{ asset('css/app.css') }}">
         <title>Hello, world!</title>
         <title>@yield('title')</title>
+        <style>
+            .hero-el-category a {
+                background-color: {{ $color }};
+            }
+            .hero-el-category a:hover {
+                background-color: {{ $dark }};
+            }
+            .hero-el-title a:hover,
+            .feed-el-title a:hover,
+            .hero-el-author:hover,
+            .feed-el-author:hover {
+                color: {{ $dark }};
+            }
+            #feed-river-title,
+            .hero-el-author,
+            .feed-el-author {
+                color: {{ $color }};
+            }
+            @media (min-width: 576px) {
+                #hero-el-1:before {
+                    content: '';
+                    position: absolute;
+                    top: 0;
+                    right: 0;
+                    border-top: 65px solid #fff;
+                    border-left: 65px solid {{ $color }};
+                    width: 0;
+                }
+            }
+        </style>
     </head>
     <body>
         <header>

@@ -21,15 +21,11 @@ h1 a, h2 a, h3 a, h4 a, h5 a, h6 a {
   margin-bottom: 0.3rem;
   a {
     padding: 5px 8px 4px;
-    background-color: $main-color;
     color: $white;
     transition: background-color;
     text-decoration: none;
     text-transform: uppercase;
     font-size: 0.7rem !important;
-  }
-  a:hover {
-    background-color: darken($main-color, 10%);
   }
 }
 
@@ -42,19 +38,13 @@ h1 a, h2 a, h3 a, h4 a, h5 a, h6 a {
   }
   a:hover {
     text-decoration: none;
-    color: darken($main-color, 10%);
   }
 }
 
 .hero-el-author,
-.feed-el-author {
-  color: $main-color;
-  text-decoration: none;
-}
-
+.feed-el-author,
 .hero-el-author:hover,
 .feed-el-author:hover {
-  color: darken($main-color, 10%);
   text-decoration: none;
 }
 
@@ -94,15 +84,6 @@ h1 a, h2 a, h3 a, h4 a, h5 a, h6 a {
 }
 
 @media (min-width: 576px) {
-  #hero-el-1:before {
-    content: '';
-    position: absolute;
-    top: 0;
-    right: 0;
-    border-top: 65px solid $white;
-    border-left: 65px solid $main-color;
-    width: 0;
-  }
   .hero-el-title {
     font-size: 1.1em;
   }
@@ -287,7 +268,6 @@ h1 a, h2 a, h3 a, h4 a, h5 a, h6 a {
 
 #feed-river-title {
   text-transform: uppercase;
-  color: $main-color;
 }
 
 @media (max-width: 575px) {

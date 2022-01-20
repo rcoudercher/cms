@@ -11341,15 +11341,11 @@ h1 a, .h1 a, h2 a, .h2 a, h3 a, .h3 a, h4 a, .h4 a, h5 a, .h5 a, h6 a, .h6 a {
 }
 .hero-el-category a {
   padding: 5px 8px 4px;
-  background-color: #da0050;
   color: #fff;
   transition: background-color;
   text-decoration: none;
   text-transform: uppercase;
   font-size: 0.7rem !important;
-}
-.hero-el-category a:hover {
-  background-color: #a7003d;
 }
 
 .hero-el-title,
@@ -11364,18 +11360,12 @@ h1 a, .h1 a, h2 a, .h2 a, h3 a, .h3 a, h4 a, .h4 a, h5 a, .h5 a, h6 a, .h6 a {
 .hero-el-title a:hover,
 .feed-el-title a:hover {
   text-decoration: none;
-  color: #a7003d;
 }
 
 .hero-el-author,
-.feed-el-author {
-  color: #da0050;
-  text-decoration: none;
-}
-
+.feed-el-author,
 .hero-el-author:hover,
 .feed-el-author:hover {
-  color: #a7003d;
   text-decoration: none;
 }
 
@@ -11418,16 +11408,6 @@ h1 a, .h1 a, h2 a, .h2 a, h3 a, .h3 a, h4 a, .h4 a, h5 a, .h5 a, h6 a, .h6 a {
   }
 }
 @media (min-width: 576px) {
-  #hero-el-1:before {
-    content: "";
-    position: absolute;
-    top: 0;
-    right: 0;
-    border-top: 65px solid #fff;
-    border-left: 65px solid #da0050;
-    width: 0;
-  }
-
   .hero-el-title {
     font-size: 1.1em;
   }
@@ -11617,7 +11597,6 @@ h1 a, .h1 a, h2 a, .h2 a, h3 a, .h3 a, h4 a, .h4 a, h5 a, .h5 a, h6 a, .h6 a {
 
 #feed-river-title {
   text-transform: uppercase;
-  color: #da0050;
 }
 
 @media (max-width: 575px) {
