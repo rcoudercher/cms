@@ -17,11 +17,11 @@ use App\Models\Image;
 use Illuminate\Support\Str;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 
-
-use Illuminate\Support\Facades\Config as Config2;
-use Illuminate\Support\Facades\URL;
+// use Illuminate\Support\Facades\Config as Config2;
+// use Illuminate\Support\Facades\URL;
 
 class FrontController extends Controller
 {  
@@ -32,14 +32,22 @@ class FrontController extends Controller
                       ->orderByDesc('published_at')
                       ->take(8)
                       ->get();
-            
+    
+    // feed articles
+    if ($heroArticles->isNotEmpty()) {
+      $articles = Article::public()
+                      ->whereNotIn('id', $heroArticles->pluck('id')->toArray())
+                      ->orderByDesc('published_at')
+                      ->take(20)
+                      ->get();
+    } else {
+      $articles = collect([]);
+    }
+
     return view('front.home')->with([
       'heroArticles' => $heroArticles,
-      'articles' => Article::public()
-                              ->whereDate('published_at', '<', $heroArticles[7]->published_at)
-                              ->orderByDesc('published_at')
-                              ->take(20)
-                              ->get(),
+      'articles' => $articles,
+      'blankArticle' => new Article(),
     ]);
   }
   

@@ -5,6 +5,9 @@ namespace App\Console;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
+use Carbon\Carbon;
+use App\Models\Article;
+
 class Kernel extends ConsoleKernel
 {
     /**
@@ -24,7 +27,16 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('inspire')->hourly();
+        // publish scheduled articles
+        $schedule->call(function () {
+            $articles = Article::where('scheduled_at', '<=', Carbon::now())->get();
+            foreach ($articles as $article) {
+                $article->scheduled_at = null;
+                $article->published_at = Carbon::now()->format('Y-m-d H:i:s');
+                $article->save();
+            }
+        })->everyMinute();
+
     }
 
     /**

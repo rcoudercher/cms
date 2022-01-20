@@ -51,8 +51,6 @@ Route::prefix('admin')
   // Settings routes
   Route::prefix('settings')->name('settings.')->group(function () {
     Route::get('/', [SettingsController::class, 'index'])->name('index');
-
-
     Route::prefix('logo')->name('logo.')->group(function () {
       Route::get('/', [LogoController::class, 'index'])->name('index');
       Route::post('/', [LogoController::class, 'store'])->name('store');
@@ -60,8 +58,6 @@ Route::prefix('admin')
       Route::patch('/', [LogoController::class, 'update'])->name('update');
       Route::delete('/', [LogoController::class, 'delete'])->name('delete');
     });
-
-    
   });
     
   // Other comment routes
@@ -76,12 +72,9 @@ Route::prefix('admin')
   Route::prefix('articles')->name('articles.')->group(function () {
     Route::patch('{article}/publish', [ArticleController::class, 'publish'])->name('publish');
     Route::patch('{article}/hide', [ArticleController::class, 'hide'])->name('hide');
-
     Route::get('{article}/schedule', [ArticleController::class, 'editSchedule'])->name('schedule.edit');
     Route::patch('{article}/schedule', [ArticleController::class, 'updateSchedule'])->name('schedule.update');
-    
   });
-  
 });
 
 // AUTH routes ----------------------------------------

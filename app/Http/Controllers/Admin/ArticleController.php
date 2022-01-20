@@ -129,7 +129,7 @@ class ArticleController extends Controller
     ]);
 
     // update config
-    $article->scheduled_at = $request->input('scheduled_at');
+    $article->scheduled_at = Carbon::parse($request->input('scheduled_at'))->format('Y-m-d H:i:s');
     $article->save();
 
     return redirect()->route('admin.articles.index')
