@@ -15,6 +15,7 @@ use App\Http\Controllers\Admin\TagController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\SettingsController;
 use App\Http\Controllers\Admin\LogoController;
+use App\Http\Controllers\Admin\GoogleAnalyticsController;
 
 // Front controllers
 use App\Http\Controllers\Front\FrontController;
@@ -57,6 +58,13 @@ Route::prefix('admin')
       Route::get('edit', [LogoController::class, 'edit'])->name('edit');
       Route::patch('/', [LogoController::class, 'update'])->name('update');
       Route::delete('/', [LogoController::class, 'delete'])->name('delete');
+    });
+    Route::prefix('google-analytics')->name('ga.')->group(function () {
+      Route::get('/', [GoogleAnalyticsController::class, 'index'])->name('index');
+      Route::post('/', [GoogleAnalyticsController::class, 'store'])->name('store');
+      Route::get('edit', [GoogleAnalyticsController::class, 'edit'])->name('edit');
+      Route::patch('/', [GoogleAnalyticsController::class, 'update'])->name('update');
+      Route::delete('/', [GoogleAnalyticsController::class, 'delete'])->name('delete');
     });
   });
     

@@ -5,23 +5,18 @@ namespace App\Http\Controllers\Front;
 use App\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
+use Carbon\Carbon;
+
 use App\Models\Article;
 use App\Models\Tag;
 use App\Models\Category;
 use App\Models\Author;
-use App\Models\Config;
-use App\Models\Person;
 use App\Models\Page;
 use App\Models\Comment;
 use App\Models\Image;
-use Illuminate\Support\Str;
-use Carbon\Carbon;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
-
-
-// use Illuminate\Support\Facades\Config as Config2;
-// use Illuminate\Support\Facades\URL;
 
 class FrontController extends Controller
 {  
