@@ -33,21 +33,25 @@
                 <h2 id="feed-river-title" class="ms-3">Derniers articles</h2>
             </div>
             <div id="feed-elements">
-                @foreach ($articles as $article)
-                    <div class="feed-el py-2 d-flex">
-                        <div class="feed-el-image">
-                            <a href="{{ route('article.show', ['article' => $article]) }}">
-                                <img class="img-fluid" src="{{ $article->image->url }}">
-                            </a>
+                @if ($articles->count() != 0)
+                    @foreach ($articles as $article)
+                        <div class="feed-el py-2 d-flex">
+                            <div class="feed-el-image">
+                                <a href="{{ route('article.show', ['article' => $article]) }}">
+                                    <img class="img-fluid" src="{{ $article->image->url }}">
+                                </a>
+                            </div>
+                            <div class="feed-el-body mx-2">
+                                <h2 class="feed-el-title">
+                                    <a href="{{ route('article.show', ['article' => $article]) }}">{{ $article->title }}</a>
+                                </h2>
+                                <div class="feed-el-byline">Par <a class="feed-el-author" href="{{ route('author.show', ['author' => $article->author]) }}">{{ $article->author->name }}</a> | {{ $article->postedAtDifference() }} | {{ $article->comments()->approved()->count() }} commentaires</div>
+                            </div>
                         </div>
-                        <div class="feed-el-body mx-2">
-                            <h2 class="feed-el-title">
-                                <a href="{{ route('article.show', ['article' => $article]) }}">{{ $article->title }}</a>
-                            </h2>
-                            <div class="feed-el-byline">Par <a class="feed-el-author" href="{{ route('author.show', ['author' => $article->author]) }}">{{ $article->author->name }}</a> | {{ $article->postedAtDifference() }} | {{ $article->comments()->approved()->count() }} commentaires</div>
-                        </div>
-                    </div>
-                @endforeach
+                    @endforeach
+                @else
+                    <p>Pas encore d'autres articles</p>
+                @endif
             </div>
         </div>
         <div id="feed-side" class="d-none d-lg-block"></div>
