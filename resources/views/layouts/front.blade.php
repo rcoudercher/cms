@@ -1,7 +1,7 @@
 @php
     $logo = \App\Models\Config::where('name', 'logo')->first();
     $gaTrackingCode = \App\Models\Config::where('name', 'ga-tracking-code')->first();
-    $color = \App\Models\Config::where('name', 'color')->first();
+    $color = \App\Models\Config::where('name', 'theme-color')->first();
     is_null($color) ? $color = '#da0050' : $color = $color->value;
 
     function adjustBrightness($hex, $steps) {

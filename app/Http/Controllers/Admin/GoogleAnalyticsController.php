@@ -65,9 +65,6 @@ class GoogleAnalyticsController extends Controller
     {
         Config::firstWhere('name', 'ga-tracking-code')->delete();
 
-        // $config = Config::firstWhere('name', 'ga-tracking-code');
-        // $config->delete();
-
         return redirect()->route('admin.settings.ga.index')
         ->with('message', 'Google Analytics tracking code deleted successfully.');
     }

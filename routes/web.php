@@ -16,6 +16,8 @@ use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\SettingsController;
 use App\Http\Controllers\Admin\LogoController;
 use App\Http\Controllers\Admin\GoogleAnalyticsController;
+use App\Http\Controllers\Admin\Settings\ThemeColorController;
+
 
 // Front controllers
 use App\Http\Controllers\Front\FrontController;
@@ -65,6 +67,13 @@ Route::prefix('admin')
       Route::get('edit', [GoogleAnalyticsController::class, 'edit'])->name('edit');
       Route::patch('/', [GoogleAnalyticsController::class, 'update'])->name('update');
       Route::delete('/', [GoogleAnalyticsController::class, 'delete'])->name('delete');
+    });
+    Route::prefix('theme-color')->name('theme-color.')->group(function () {
+      Route::get('/', [ThemeColorController::class, 'index'])->name('index');
+      Route::post('/', [ThemeColorController::class, 'store'])->name('store');
+      Route::get('edit', [ThemeColorController::class, 'edit'])->name('edit');
+      Route::patch('/', [ThemeColorController::class, 'update'])->name('update');
+      Route::delete('/', [ThemeColorController::class, 'delete'])->name('delete');
     });
   });
     
