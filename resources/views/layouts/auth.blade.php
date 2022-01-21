@@ -1,22 +1,28 @@
+@php
+    $logo = \App\Models\Config::where('name', 'logo')->first();
+    $gaTrackingCode = \App\Models\Config::where('name', 'ga-tracking-code')->first();
+@endphp
 <!doctype html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    {!! is_null($gaTrackingCode) ? '' :  $gaTrackingCode->value !!}
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     <script src="{{ asset('js/app.js') }}" defer></script>
-    <title>@yield('title') | Le Droit Chemin</title>
+    <title>@yield('title')</title>
   </head>
   <body>
     <div class="container">
-      <div class="pt-5 text-center">
-        @include('partials.logo')
-      </div>
+      @if (!is_null($logo))
+        <div class="pt-5 text-center">
+          <a class="navbar-brand" href="{{ route('home') }}">
+            <img src="{{ $logo->value }}" height="40">
+          </a>
+        </div>
+      @endif
       <div class="mx-auto mt-5 mb-4" style="width: 340px;">
         @yield('content')
-      </div>
-      <div class="text-center my-4">
-        <a class="footerLink" href="{{ route('privacy') }}">Confidentialité</a>
       </div>
       {{-- shows a notification if there is one --}}
       @if (session()->has('notification'))

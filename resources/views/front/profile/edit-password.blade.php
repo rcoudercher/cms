@@ -14,6 +14,7 @@
     }
   @endphp
   
+<div class="container mt-4">
   <h1 class="h2">Modifier mon mot de passe</h1>
   <form method="POST" action="{{ route('profile.password.update') }}">
     @csrf
@@ -46,7 +47,8 @@
       <input name="password_confirmation" type="password" class="form-control" id="password_confirmation">
     </div>
     
-    <button type="submit" class="button">Envoyer</button>
+    <button type="submit" class="btn btn-primary">Envoyer</button>
   </form>
+</div>
 
 @endsection

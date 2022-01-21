@@ -3,9 +3,8 @@
 @section('title', 'Commentaires')
 
 @section('content')
+<div class="container mt-4">
   <h1 class="h2 mb-3">Commentaires</h1>
-  
-  
   @php
     $count = Auth::user()->comments->count();
   @endphp
@@ -65,6 +64,5 @@
     </table>
     {{ $comments->links() }}
   @endif
-  
-  
+</div>  
 @endsection
