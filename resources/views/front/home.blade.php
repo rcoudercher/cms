@@ -30,7 +30,7 @@
     <div id="feed" class="mx-sm-3 mt-5 d-flex">
         <div id="feed-river">
             <div>
-                <h2 id="feed-river-title" class="ms-3">Derniers articles</h2>
+                <h2 id="feed-river-title" class="ms-3">Derniers articles:</h2>
             </div>
             <div id="feed-elements">
                 @if ($articles->count() != 0)
