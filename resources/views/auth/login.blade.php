@@ -26,7 +26,7 @@
         <div class="invalid-feedback">{{ $message }}</div>
       @enderror
     </div>
-    <button class="button w-100 mt-3" type="submit">Envoyer</button>
+    <button class="btn btn-primary w-100 mt-3" type="submit">Envoyer</button>
   </form>
   <div class="text-center">
     <a href="{{ route('password.request') }}">Mot de passe oublié ?</a>
