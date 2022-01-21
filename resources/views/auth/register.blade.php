@@ -40,7 +40,7 @@
       <label for="password_confirmation" class="form-label">Confirmer le mot de passe</label>
       <input name="password_confirmation" type="password" class="form-control" id="password_confirmation">
     </div>
-    <button class="button w-100 mt-3" type="submit">Envoyer</button>
+    <button class="btn btn-primary w-100 mt-3" type="submit">Envoyer</button>
   </form>
   <div class="text-center">
     <a href="{{ route('login') }}">Vous avez déjà un compte ?</a>
